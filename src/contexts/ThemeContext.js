@@ -13,7 +13,7 @@ class ThemeProvider extends Component {
 
     render() {
         return(
-            <ThemeContext.Provider value={{...this.state, tastesLikeChicken: true}}>
+            <ThemeContext.Provider value={{...this.state}}>
                 {this.props.children}
             </ThemeContext.Provider>
         );
