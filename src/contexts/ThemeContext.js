@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext } from 'react';
 import useToggleState from '../hooks/useToggleState';
 
 const ThemeContext = createContext();
