@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import { LanguageContext } from '../contexts/LanguageContext';
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -36,51 +36,49 @@ const text = {
     }
 }
 
-class Form extends Component {
-    static contextType = LanguageContext;
-    render() {
-        const { language, changeLanguage } = this.context;
-        const { signIn, email, password, rememberMe } = text[language];
-        const { classes } = this.props;
-        return (
-            <main className={classes.main}>
-                <Paper className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography variant="h5">{signIn}</Typography>
-                    <Select value={language} onChange={changeLanguage}>
-                        <MenuItem value="english">English</MenuItem>
-                        <MenuItem value="french">French</MenuItem>
-                        <MenuItem value="spanish">Spanish</MenuItem>
-                    </Select>
-                    <form className={classes.form}>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="email">{email}</InputLabel>
-                            <Input id="email" name="email"></Input>
-                        </FormControl>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">{password}</InputLabel>
-                            <Input id="password" name="password"></Input>
-                        </FormControl>
-                        <FormControlLabel
-                            control={<Checkbox color="primary" />}
-                            label={rememberMe}
-                        />
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                            fullWidth
-                            className={classes.submit}
-                        >
-                            {signIn}
-                        </Button>
-                    </form>
-                </Paper>
-            </main>
-        );
-    }
+function Form(props) {
+    const { language, changeLanguage } = useContext(LanguageContext);
+    const { signIn, email, password, rememberMe } = text[language];
+    const { classes } = props;
+
+    return(
+        <main className={classes.main}>
+            <Paper className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography variant="h5">{signIn}</Typography>
+                <Select value={language} onChange={changeLanguage}>
+                    <MenuItem value="english">English</MenuItem>
+                    <MenuItem value="french">French</MenuItem>
+                    <MenuItem value="spanish">Spanish</MenuItem>
+                </Select>
+                <form className={classes.form}>
+                    <FormControl margin="normal" required fullWidth>
+                        <InputLabel htmlFor="email">{email}</InputLabel>
+                        <Input id="email" name="email"></Input>
+                    </FormControl>
+                    <FormControl margin="normal" required fullWidth>
+                        <InputLabel htmlFor="password">{password}</InputLabel>
+                        <Input id="password" name="password"></Input>
+                    </FormControl>
+                    <FormControlLabel
+                        control={<Checkbox color="primary" />}
+                        label={rememberMe}
+                    />
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        className={classes.submit}
+                    >
+                        {signIn}
+                    </Button>
+                </form>
+            </Paper>
+        </main>
+    );
 }
 
 export default withStyles(styles)(Form);
